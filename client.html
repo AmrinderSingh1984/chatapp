@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  
+  
+  
+  .flex-container {
+      overflow-y: scroll;
+      height: 91%;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+  }
+  
+  .flex-item-left {
+    position: relative;
+      overflow-y: scroll;
+      min-width: 190px;
+      height: 100%;
+    background-color: white;
+    padding: 5px;
+    flex: 95%;
+  }
+  
+  .flex-item-right {
+      height: 95%;
+      /* background-color: #f1ecec; */
+    flex: 5%;
+  }
+  
+  
+  
+  @media (max-width: 800px) {
+    .flex-container {
+      flex-direction: row;
+    }
+    .flex-item-left{
+      flex: 90%;
+    }
+    .flex-item-right{
+      flex: 10%;
+    }
+  }
+  .container {
+    height: 90%;
+    overflow-y: scroll;
+      text-align: left;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 2px 0;
+    list-style-type: none;
+  }
+  .container2 {
+    height: 94%;
+    overflow-y: auto;
+      text-align: left;
+    /* background-color: #f7f0cd; */
+    border-radius: 10px;
+    padding: 10px;
+    margin: 2px 0;
+    list-style-type: none;
+  }
+  
+  .container::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .container .name{
+    max-width: 100px;
+    float: left;
+   word-wrap: break-word;
+    margin-right: 10px;
+    border:none;
+    color: rgb(234, 42, 81);
+  }
+  
+  .names{
+   word-wrap: break-word;
+    margin-right: 10px;
+    border:none;
+    color: rgb(27, 126, 224);
+    font-weight: bold;
+  }
+  
+  
+  .open-button {
+    background-color: #555;
+    color: white;
+    padding: 5px 5px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    /* width: 280px; */
+  }
+  
+  /* The popup form - hidden by default */
+  .form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+  }
+  
+  /* Add styles to the form container */
+  .form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  /* Full-width input fields */
+  .form-container input[type=text], .form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+  /* When the inputs get focus, do something */
+  .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Set a style for the submit/login button */
+  .form-container .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+  }
+  
+  /* Add a red background color to the cancel button */
+  .form-container .cancel {
+    background-color: red;
+  }
+  
+  /* Add some hover effects to buttons */
+  .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+  }
+  
+  
+  .sendTo{
+    font-weight: 600;
+    word-wrap: break-word;
+    border: none;
+   max-width: 60px ;
+   height: 100%;
+   background: #dac9f3;
+   color: rgb(242, 65, 65);
+  }
+  
+  li{
+    /* width: auto; */
+    padding: 10px 10px;
+    margin: 7px;
+    border-radius: 6px;
+    background: #dac9f3;
+    word-wrap: break-word;
+  }
+  
+  .msgg{
+    color: #04945f;
+    font-weight: 600;
+    word-wrap: break-word;
+  }
+  
+  .message-input {
+              display: flex;
+              flex-wrap: wrap;
+              padding: 10px;
+              background-color: #fff;
+          }
+  
+          input {
+              width: 100%;
+              flex: 8;
+              padding: 10px;
+              border: 1px solid #ccc;
+              border-radius: 5px 0 0 5px;
+              outline: none;
+          }
+  
+          .btn {
+             flex: 1;
+              padding: 5px 10px;
+              background-color: #009fcb;
+              border: none;
+              border-radius: 0 5px 5px 0;
+              color: #fff;
+              cursor: pointer;
+              word-wrap:break-word;
+          }
+  
+    </style>
+</head>
+<body>
+    <h3 style="height: auto;text-align: center; padding: 5px;background-color: rgb(90, 128, 225);color: white;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Chat Room</h3>
+    <div class="chatts">
+      <button onclick="setST()">Main</button>
+    </div>
+    <div class="flex-container">
+      
+        <div class="flex-item-left">
+            <ul class="container" id="msgss">
+           
+            </ul>
+              <div class="message-input">
+                <input id="msg" placeholder="Type your message">
+                <button class="btn" onclick="send()">Send</button>
+            </div>
+        </div>
+        <div class="flex-item-right" id="right">
+            <ul class="container2" id="userss">
+
+            </ul>
+        </div>
+      </div>
+
+      
+      <button class="open-button" onclick="openForm()">Open Form</button>
+      <div class="form-popup" id="myForm">
+        <div  class="form-container">
+      
+          <label for="email" ><b>Nicname</b></label>
+          <input id="n" type="text" placeholder="Nickname" name="email" required>
+      
+          <label for="psw"><b>Password</b></label>
+          <input id="p" type="password" placeholder="Enter Password" name="psw" required>
+      
+          <button  class="btn" onclick="enter()">Enter</button>
+         </div>
+      </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+
+const socket = io();
+
+let sendto="main";
+
+let user={
+  n:null,
+  p:null,
+  id:null,
+  private_chats:[
+    {
+      with:{
+        n:"xyz",
+        p:"xyz",
+        id:"xyz",
+        private_chat:[null]
+      },
+      msgs:[null]
+    }
+  ]
+};
+
+
+u=[]
+
+function setST() {
+  sendto="main"
+}
+
+socket.on("users", (users)=>{
+  u=users;
+  console.log(u);
+
+  userss=document.getElementById("userss")
+
+  userss.innerHTML=""
+
+
+  for (let i = 0; i < u.length; i++) {
+    l=document.createElement("li")
+    l.innerHTML=`<button class="sendTo"  onclick="sendTo('${u[i].n}','${u[i].p}','${u[i].id}')">${u[i].n}</button>`;
+    userss.appendChild(l);
+  }
+})
+
+function sendTo(n,p,id) {
+  console.log("clicked "+n+" "+id);
+
+
+  for (let i = 0; i < u.length; i++) {
+    if(u[i].n==n && u[i].p==p){
+      sendto=u[i]
+      return
+    }
+    
+  }
+}
+
+function send(){
+
+  event.preventDefault();
+  if(user.n==null){
+    console.log("register first");
+    return
+  }
+  m=document.getElementById("msg");
+  
+  if(m.value==""){
+    return
+  }
+
+if(sendto=="main"){  
+  socket.emit("send", {m:m.value,user:user,sendto:sendto});
+  m.value=""
+}
+else{
+      let b=1;
+      let c=1;
+      let s,r,arr;
+      let w,k;
+
+
+      msg={
+        m:m.value,
+        user:user,
+        sendto:sendto
+      }
+
+      for (let i = 0; i < u.length; i++) {
+        if(u[i].n==user.n && u[i].p==user.p){
+          s=i;
+        }
+      }
+      for (let i = 0; i < u.length; i++) {
+        if(u[i].n==sendto.n && u[i].p==sendto.p){
+          r=i;
+        }
+      }
+      if(b){
+      for (let i = 0; i < u[s].private_chats.length; i++) {
+        if(u[s].private_chats[i].with.n==sendto.n && u[s].private_chats[i].with.p==sendto.p){
+          w=i;
+          u[s].private_chats[i].msgs.push(msg)
+          arr=u[s].private_chats[i].msgs;
+          b=0;
+        }  
+      }  
+      }
+      if(b){
+        pvtChat={
+          with:u[r],
+          msgs:[]
+        }
+        pvtChat.msgs.push(msg)
+        u[s].private_chats.push(pvtChat)
+      }
+       if(c){
+      for (let i = 0; i < u[r].private_chats.length; i++) {
+        if(u[r].private_chats[i].with.n==user.n && u[r].private_chats[i].with.p==user.p){
+          k=i
+          u[r].private_chats[i].msgs=arr
+          c=0;
+        }    
+      }
+      }
+      if(c){
+        pvtChat={
+          with:u[s],
+          msgs:[]
+        }
+        pvtChat.msgs.push(msg)
+        u[r].private_chats.push(pvtChat)
+      }
+    
+
+    console.log(u[s]);
+    console.log(u[r]);
+
+    
+
+    }
+}
+
+socket.on("main_msg",(msgs)=>{
+  console.log(msgs)
+  msgss=document.getElementById("msgss")
+
+  msgss.innerHTML=""
+
+for (let i = 0; i < msgs.length; i++) {
+  l=document.createElement("li")
+  l.innerHTML=`<p class="msgg"><span class="names">${msgs[i].user.n}: </span>${msgs[i].m}</p>`;
+  msgss.appendChild(l);
+}
+})
+
+socket.on('pvtmsg', (msg)=>{
+
+console.log(user.private_chats);
+// console.log(us);
+
+//   if(user.n==us.u1.n && user.p==us.u1.p){
+//     user=us.u1;
+//     console.log(user.private_chats);
+//   }
+//   if(user.n==us.u2.n && user.p==us.u2.p){
+//     user=us.u2;
+//     console.log(user.private_chats);
+//   }
+
+})
+
+
+function enter() {
+console.log(u);
+
+  n=document.getElementById("n").value;
+  p=document.getElementById("p").value;
+
+
+  if(n==""){
+    return
+  }
+
+  user.id=socket.id;
+
+
+  for (let i = 0; i < u.length; i++) {
+    if(n==u[i].n ){
+      alert("aleready registered")
+      // closeForm()
+      return
+    }
+  }
+    for (let i = 0; i < u.length; i++) {
+      if(user.id==u[i].id){
+      u[i].n=n;
+      u[i].p=p;
+      socket.emit("users_from_c",u)
+      closeForm()
+      return
+    }     
+    }
+
+
+
+  user.n=n;
+  user.p=p;
+   
+
+  u.push(user)
+  socket.emit("users_from_c",u)
+  
+  closeForm()
+}
+
+
+
+
+
+
+
+
+
+
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
+
+</body>
+</html>
